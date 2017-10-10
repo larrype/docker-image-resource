@@ -174,7 +174,7 @@ version is the image's digest.
   be tagged with the `latest_tag` in addition to whatever other tag was specified.
 
 * `latest_tag`: *Optional.*  Default `latest`. If tag_as_latest is specified, the
-  image will additionaly be tagged with this value.
+  image will additionally be tagged with this value.
 
 * `build_args`: *Optional.*  A map of Docker build arguments.
   
