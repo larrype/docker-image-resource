@@ -171,7 +171,10 @@ version is the image's digest.
   numbers.
 
 * `tag_as_latest`: *Optional.*  Default `false`. If true, the pushed image will
-  be tagged as `latest` in addition to whatever other tag was specified.
+  be tagged with the `latest_tag` in addition to whatever other tag was specified.
+
+* `latest_tag`: *Optional.*  Default `latest`. If tag_as_latest is specified, the
+  image will additionaly be tagged with this value.
 
 * `build_args`: *Optional.*  A map of Docker build arguments.
   
