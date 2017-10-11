@@ -171,6 +171,14 @@ version is the image's digest.
   contents of the file will be used as the tag, if not found, the string will be used
   as the tag.
 
+  Example:
+
+  ```yaml
+  additional_tags:
+    v1.0-stable
+    version-resource/number
+  ```
+
 * `tag_prefix`: *Optional.* If specified, the tag read from the file will be
   prepended with this string. This is useful for adding `v` in front of version
   numbers.
