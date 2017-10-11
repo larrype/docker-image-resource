@@ -175,8 +175,8 @@ version is the image's digest.
 
   ```yaml
   additional_tags:
-    v1.0-stable
-    version-resource/number
+  - v1.0-stable
+  - version-resource/number
   ```
 
 * `tag_prefix`: *Optional.* If specified, the tag read from the file will be
