@@ -163,8 +163,10 @@ version is the image's digest.
 * `pull_tag`: *Optional.*  **DEPRECATED. Use `get` and `load` instead.** Default
   `latest`. The tag of the repository to pull down via `pull_repository`.
 
-* `tag`: *Optional.* The value should be a path to a file containing the name
-  of the tag.
+* `tag`: *Optional.* The value should be a list of tag strings. Each tag string can 
+  either be a tag name or a path to a file containing the tag name. If a file exists
+  with the tag string then the tag name will be taken from the file otherwisw the
+  tag string will be used as a tag name.
 
 * `tag_prefix`: *Optional.* If specified, the tag read from the file will be
   prepended with this string. This is useful for adding `v` in front of version

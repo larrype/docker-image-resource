@@ -184,3 +184,12 @@ docker_pull() {
   printf "\n${RED}Failed to pull image %s.${NC}" "$1"
   exit 1
 }
+
+is_array()
+{   #detect if arg is an array, returns 0 on sucess, 1 otherwise
+    [ -z "$1" ] && return 1
+    if [ -n "$BASH" ]; then
+        declare -p ${1} 2> /dev/null | grep 'declare \-a' >/dev/null && return 0
+    fi
+    return 1
+}
