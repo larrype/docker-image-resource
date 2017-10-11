@@ -54,7 +54,7 @@ tag_prefix=$(jq -r '.params.tag_prefix // ""' < $payload)
 need_tag_as_latest=$(jq -r '.params.tag_as_latest // "false"' < $payload)
 build_args=$(jq -r '.params.build_args // []' < $payload)
 build_args_file=$(jq -r '.params.build_args_file // ""' < $payload)
-
+addl_tags=($(jq -r '.params.additional_tags // [] | .[]' < $payload))
 
 tag_name=""
 if [ -n "$tag_params" ]; then
@@ -66,6 +66,18 @@ if [ -n "$tag_params" ]; then
 else
   tag_name="$tag_source"
 fi
+
+tag_names=()
+for addl_tag in "${addl_tags[@]}"; do
+  if [ -f "$addl_tag" ]; then
+    tag_from_file="$(cat $addl_tag)"
+    echo "tag '$tag_from_file' from file '$addl_tag' will be applied as tag"
+    tag_names+=("${tag_prefix}${tag_from_file}")
+  else
+    echo "tag '$addl_tag' will be applied as tag"
+    tag_names+=("${tag_prefix}${addl_tag}")
+  fi
+done
 
 if [ -z "$repository" ]; then
   echo "must specify repository"
@@ -179,6 +191,13 @@ if [ "$need_tag_as_latest" = "true" ] && [ "${tag_name}" != "latest"  ]    ; the
   docker push "${repository}:latest"
   echo "${repository}:${tag_name} tagged as latest"
 fi
+
+for ((i=0; i<${#tag_names[*]}; i++));
+do
+  docker tag "${repository}:${tag_name}" "${repository}:${tag_names[i]}"
+  docker push "${repository}:${tag_names[i]}"
+  echo "${repository}:${tag_name} also tagged as :${tag_names[i]}"
+done
 
 jq -n "{
   version: {

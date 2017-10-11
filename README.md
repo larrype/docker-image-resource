@@ -166,6 +166,11 @@ version is the image's digest.
 * `tag`: *Optional.* The value should be a path to a file containing the name
   of the tag.
 
+* `additional_tags`: *Optional.* A list of strings containing tag names or paths
+  files containing tag names. For each string, if a file is found at that path the
+  contents of the file will be used as the tag, if not found, the string will be used
+  as the tag.
+
 * `tag_prefix`: *Optional.* If specified, the tag read from the file will be
   prepended with this string. This is useful for adding `v` in front of version
   numbers.
